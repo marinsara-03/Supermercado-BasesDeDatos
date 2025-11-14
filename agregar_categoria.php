@@ -9,7 +9,7 @@ $conexion = new mysqli($server, $user, $pass, $db);
 
 
 if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
+    die("Hubo un error al momento de conectar. Intentalo de nuevo " . $conexion->connect_error);
 }
 
 
@@ -33,13 +33,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mensaje = "⚠️ Por favor, completa todos los campos.";
     }
 }
+
+$categorias = $conexion->query("SELECT cod_cat, nom_cat FROM categorias");
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link rel="stylesheet" href="agregar_categoria.css">
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="agregar_categoria.css">
     <title>Agregar Categorías</title>
 </head>
 <body>
