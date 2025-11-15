@@ -1,6 +1,6 @@
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f2f6fc;
+    background-color: #fdf6f9;
+    font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,10 +8,11 @@ body {
 }
 
 .contenedor {
-    background: white;
+    background: #fff;
     padding: 30px;
     border-radius: 15px;
-    box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 0 15px rgba(255, 182, 193, 0.3);
+    border-top: 6px solid #f8a5c2;
     width: 380px;
     text-align: center;
 }

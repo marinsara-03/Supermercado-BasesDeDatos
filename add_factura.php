@@ -57,11 +57,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="contenedor">
         <h2>🧾 Agregar Factura</h2>
         <form method="POST" action="">
-            <label>Número de Factura:</label>
-            <input type="number" name="nro_fac" required>
-
-            <label>Valor Total:</label>
-            <input type="number" step="0.01" name="val_tot_fac" required>
+            <input type="number" name="nro_fac" required placeholder = "Número de factura">
+            <input type="number" step="0.01" name="val_tot_fac" required placeholder = "Valor total de la factura">
 
             <label>Fecha de la Factura:</label>
             <input type="datetime-local" name="fec_fac" required>

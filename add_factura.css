@@ -20,6 +20,14 @@ h2 {
     font-weight: 600;
 }
 
+input[type="number"] {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
 form {
     display: flex;
     flex-direction: column;
