@@ -1,6 +1,6 @@
 body {
     font-family: 'Segoe UI', sans-serif;
-    background-color: #e9eff5;
+    background-color: #fce4ec; /* Rosa súper suave */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,42 +8,55 @@ body {
 }
 
 .contenedor {
-    background: white;
+    background: #ffffff;
     padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
-    width: 380px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 18px rgba(255, 105, 180, 0.25); /* Sombra rosada */
+    width: 400px;
     text-align: center;
+    border: 2px solid #f8bbd0; /* Borde rosado suave */
 }
 
 h2 {
-    color: #333;
+    color: #d81b60; /* Rosa fuerte */
     margin-bottom: 20px;
+    font-weight: bold;
 }
 
-input[type="text"], input[type="email"] {
+input[type="text"], 
+input[type="email"] {
     width: 90%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-}
-
-input[type="submit"] {
-    background-color: #009688;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+    padding: 12px;
+    margin: 12px 0;
+    border: 2px solid #f8bbd0;
+    border-radius: 10px;
+    background-color: #fff0f6;
     transition: 0.3s;
 }
 
+input[type="text"]:focus,
+input[type="email"]:focus {
+    border-color: #ec407a;
+    box-shadow: 0 0 5px rgba(236, 64, 122, 0.5);
+}
+
+input[type="submit"] {
+    background-color: #ec407a; /* Botón rosado */
+    color: white;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
 input[type="submit"]:hover {
-    background-color: #00796b;
+    background-color: #d81b60; /* Más oscuro al pasar */
 }
 
 .mensaje {
     margin-top: 15px;
     font-weight: bold;
+    color: #ad1457;
 }

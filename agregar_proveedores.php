@@ -42,6 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Agregar Proveedores</title>
 </head>
 <body>
+    <?php include __DIR__ . '/menu.php'; ?>
     <div class="contenedor">
         <h2>Agregar Nuevo Proveedor</h2>
 

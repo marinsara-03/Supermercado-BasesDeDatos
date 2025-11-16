@@ -54,6 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
+    <?php include __DIR__ . '/menu.php'; ?>
     <div class="contenedor">
         <h2>🧾 Agregar Factura</h2>
         <form method="POST" action="">

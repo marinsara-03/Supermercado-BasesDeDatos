@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Agregar Cajero</title>
 </head>
 <body>
-
+    <?php include __DIR__ . '/menu.php'; ?>
     <div class="contenedor">
         <h2>Agregar Nuevo Cajero</h2>
 

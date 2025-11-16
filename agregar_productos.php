@@ -6,6 +6,7 @@ $pass = "";
 $db = "supermercado";
 
 $conexion = new mysqli($server, $user, $pass, $db);
+$conexion->set_charset("utf8mb4");
 
 
 if ($conexion->connect_error) {
@@ -17,20 +18,21 @@ $mensaje = "";
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $codigo_producto = $_POST['cod_pro'];
+    $codigo_producto  = $_POST['cod_pro'];
     $codigo_categoria = $_POST['cod_cat'];
-    $fecha_ven_pro = $_POST['fec_ven_pro'];
-    $cantidad_prod = $_POST['cant_pro'];
-    $nombre_prod = $_POST['nom_pro'];
-    $valor_producto = $_POST['val_pro'];
+    $fecha_ven_pro    = $_POST['fec_vec_pro']; 
+    $cantidad_prod    = $_POST['cant_pro'];
+    $nombre_prod      = $_POST['nom_pro'];
+    $valor_producto   = $_POST['val_pro'];
 
     
     if (!empty($codigo_producto) && !empty($codigo_categoria) && !empty($fecha_ven_pro) && !empty($cantidad_prod) && !empty($nombre_prod) && !empty($valor_producto)) {
-        $sql = "INSERT INTO productos (cod_pro, cod_cat, fec_ven_pro, cant_pro, nom_pro, val_pro) 
-        VALUES ('$codigo_producto', '$codigo_categoria', '$fecha_ven_pro','$cantidad_prod', '$nombre_prod', '$valor_producto',)";
+       $sql = "INSERT INTO productos (cod_pro, cod_cat, fec_vec_pro, cant_pro, nom_pro, val_pro) 
+VALUES ('$codigo_producto', '$codigo_categoria', '$fecha_vec_pro','$cantidad_prod', '$nombre_prod', '$valor_producto')";
+
         
         if ($conexion->query($sql) === TRUE) {
-            $mensaje = "✅ El producto fue agregado exitosamente.";
+            $mensaje = "El producto fue agregado exitosamente.";
         } else {
             $mensaje = "❌ Error al agregar el producto: " . $conexion->error;
         }
@@ -52,8 +54,9 @@ $categorias = $conexion->query("SELECT cod_cat, nom_cat FROM categorias");
     
 </head>
 <body>
+    <?php include __DIR__ . '/menu.php'; ?>
 <div class="contenedor">
-        <h2>🌷 Agregar Producto</h2>
+        <h2>🛒 Agregar Producto</h2>
         <form method="POST" action="">
             <label>Código del producto:</label>
             <input type="text" name="cod_pro" required>
@@ -80,6 +83,9 @@ $categorias = $conexion->query("SELECT cod_cat, nom_cat FROM categorias");
                 ?>
             </select>
             <button type="submit">💖 Agregar Producto</button>
+            <button type="button" onclick="window.location.href='ver_productos.php'" style="margin-top: 15px;">
+                📋 Ver Productos
+            </button>
         </form>
     </div>
 </body>
