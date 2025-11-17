@@ -35,6 +35,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
+// Verificar que exista la factura
+$verificarFactura = $conexion->query("SELECT nro_fac FROM facturas WHERE nro_fac = '$nro_factura'");
+
+if ($verificarFactura->num_rows == 0) {
+    $mensaje = "❌ La factura $nro_factura no existe. Debes crearla antes.";
+} else {
+    // SI EXISTE → INSERTAMOS
+    $sql = "INSERT INTO detalle_productos (nro_fac, cod_pro, cant_prod, val_unit_prod, val_total_prod)
+            VALUES ('$nro_factura', '$codigo_producto', '$cantidad_prod', '$valor_uni_prod', '$valor_total_prod')";
+
+    if ($conexion->query($sql) === TRUE) {
+        $mensaje = "✅ Detalle agregado correctamente.";
+    } else {
+        $mensaje = "❌ Error al agregar detalle: " . $conexion->error;
+    }
+}
+
+
 // ---- CONSULTAR DETALLES ----
 $detalles = $conexion->query("SELECT * FROM detalle_productos");
 
@@ -81,6 +99,7 @@ $detalles = $conexion->query("SELECT * FROM detalle_productos");
                 <th>Cantidad</th>
                 <th>Valor Unit.</th>
                 <th>Valor Total</th>
+                <th>Acciones</th>
             </tr>
 
             <?php while ($row = $detalles->fetch_assoc()) { ?>
@@ -90,6 +109,10 @@ $detalles = $conexion->query("SELECT * FROM detalle_productos");
                 <td><?= $row['cant_prod'] ?></td>
                 <td><?= $row['val_unit_prod'] ?></td>
                 <td><?= $row['val_total_prod'] ?></td>
+                <td>
+                    <a class="btn-editar" href="edit_detalle_prod.php?id=<?= $row['id'] ?>">Editar</a>
+                    <a class="btn-eliminar" href="delete_detalle_prod.php?id=<?= $row['id'] ?>" onclick="return confirm('¿Seguro que deseas eliminar este detalle?')">Eliminar</a>
+                </td>
             </tr>
             <?php } ?>
         </table>

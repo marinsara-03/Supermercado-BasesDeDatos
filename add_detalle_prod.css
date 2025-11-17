@@ -95,3 +95,30 @@ td {
     text-align: center;
     color: #b42364;
 }
+/* BOTONES EDITAR Y ELIMINAR */
+.btn-editar,
+.btn-eliminar {
+    padding: 6px 10px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.btn-editar {
+    background: #ff9acb; /* rosado pastel */
+    color: #6b2f4f;
+}
+
+.btn-editar:hover {
+    background: #ff7fbf;
+}
+
+.btn-eliminar {
+    background: #ff6e9f; /* rosado fuerte */
+    color: white;
+}
+
+.btn-eliminar:hover {
+    background: #d9537b;
+}
