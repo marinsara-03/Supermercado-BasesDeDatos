@@ -1,6 +1,6 @@
 body {
     font-family: 'Segoe UI', sans-serif;
-    background-color: #f0f4f8;
+    background-color: #fde8f0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,36 +11,46 @@ body {
     background: white;
     padding: 30px;
     border-radius: 15px;
-    box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+    box-shadow:  0px 6px 18px rgba(255, 105, 180, 0.25);
     width: 420px;
     text-align: center;
+    border: 2px solid #ffb9d9;
 }
 
 h2 {
-    color: #333;
+    color:#d63384;;
     margin-bottom: 20px;
+    font-weight: 600;
 }
 
 select {
     width: 90%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    padding: 12px;
+    margin: 12px 0;
+    border: 1px solid #f3a6c8;
+    border-radius: 10px;
+    background-color: #fff5fa; /* fondo rosado muy sutil */
+    color: #6b2f4f;
+    transition: 0.3s;
+}
+select:focus {
+    border-color: #e0639b;
+    box-shadow: 0 0 6px rgba(224, 99, 155, 0.4);
 }
 
 input[type="submit"] {
-    background-color: #ff9800;
+    background-color:  #e75480;
     color: white;
-    padding: 10px 15px;
+    padding: 12px 18px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
+    font-weight: bold;
 }
 
 input[type="submit"]:hover {
-    background-color: #e68900;
+    background-color: #d83264;
 }
 
 .mensaje {

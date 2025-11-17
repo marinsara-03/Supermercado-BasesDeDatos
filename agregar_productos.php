@@ -86,6 +86,7 @@ $categorias = $conexion->query("SELECT cod_cat, nom_cat FROM categorias");
             <button type="button" onclick="window.location.href='ver_productos.php'" style="margin-top: 15px;">
                 📋 Ver Productos
             </button>
+             <a href="proveedor_producto.php" class="btn-rosa">Asociar producto con proveedor</a>
         </form>
     </div>
 </body>

@@ -53,6 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="email" name="email_prov" placeholder="Correo electrónico" maxlength="40"><br>
             <input type="submit" value="Guardar Proveedor">
         </form>
+         <a href="proveedor_producto.php" class="btn-rosa">Asociar proveedor con producto</a>
 
         <?php if ($mensaje): ?>
             <p class="mensaje"><?= $mensaje ?></p>

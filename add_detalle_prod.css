@@ -1,53 +1,97 @@
 body {
-    background: #f2f2f2;
-    font-family: Arial, Helvetica, sans-serif;
+    background: #fde8f0;
+    font-family: 'Segoe UI', sans-serif;
+    padding-top: 80px;
 }
 
+/* CONTENEDOR GENERAL PARA PONER FORM + TABLA */
+.contenedor_principal {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+/* CONTENEDOR INDIVIDUAL */
 .contenedor {
-    width: 360px;
-    margin: 60px auto;
+    width: 420px;
     padding: 25px;
     background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
-    text-align: center;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(236, 72, 153, 0.20);
+    border: 2px solid #ffb9d9;
 }
 
+/* TITULOS */
 h2 {
+    text-align: center;
+    color: #d63384;
     margin-bottom: 20px;
-    color: #333;
 }
 
+/* INPUTS */
 input[type="text"],
-input[type="number"],
-input[type="email"] {
+input[type="number"] {
     width: 90%;
-    padding: 10px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #f3a6c8;
+    border-radius: 10px;
+    font-size: 15px;
+    background-color: #fff5fa;
+    color: #6b2f4f;
+    transition: 0.3s;
 }
 
+input:focus {
+    border-color: #e0639b;
+    box-shadow: 0 0 6px rgba(224, 99, 155, 0.3);
+    outline: none;
+}
+
+/* BOTON */
 input[type="submit"] {
     width: 95%;
-    background: #4CAF50;
+    background: #e75480;
     color: white;
-    padding: 12px;
+    padding: 14px;
     margin-top: 15px;
     border: none;
-    border-radius: 4px;
+    border-radius: 12px;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.3s;
     font-size: 16px;
+    font-weight: bold;
 }
 
 input[type="submit"]:hover {
-    background: #45a049;
+    background: #d83264;
 }
 
-.mensaje {
-    margin-top: 15px;
+/* TABLA */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th {
+    background: #ffb9d9;
+    padding: 10px;
+    color: #6b2f4f;
     font-weight: bold;
-    color: #333;
+}
+
+td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #f3a6c8;
+}
+
+/* MENSAJE */
+.mensaje {
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: center;
+    color: #b42364;
 }

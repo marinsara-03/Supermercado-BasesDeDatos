@@ -27,66 +27,13 @@ if (isset($_GET['categoria']) && $_GET['categoria'] != "") {
 <head>
     <meta charset="UTF-8">
     <title>Ver Productos</title>
-    <style>
-        body {
-            background: #fdeaff;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-        h2 {
-            margin-top: 30px;
-            color: #c72ba5;
-        }
-        .contenedor {
-            width: 90%;
-            margin: 20px auto;
-        }
-        .filtro {
-            margin-bottom: 20px;
-        }
-        select, button {
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #d88ad8;
-        }
-        button {
-            background: #e66ed6;
-            color: white;
-            cursor: pointer;
-            border: none;
-        }
-        button:hover {
-            background: #c457b8;
-        }
-        table {
-            width: 80%;
-            margin: auto;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        th {
-            background: #ffb3ec;
-            padding: 12px;
-            color: #6a006a;
-        }
-        td {
-            padding: 10px;
-            border-bottom: 1px solid #ffd4fa;
-        }
-        tr:hover {
-            background: #fff0fb;
-        }
-    </style>
+    <link rel="stylesheet" href="ver_productos.css">
 </head>
 <body>
 
 <?php include __DIR__ . '/menu.php'; ?>
 
-<h2>🌸 Productos Registrados</h2>
+<h2>🥑 Productos Registrados</h2>
 
 <div class="contenedor">
 
@@ -116,6 +63,7 @@ if (isset($_GET['categoria']) && $_GET['categoria'] != "") {
             <th>Fecha vencimiento</th>
             <th>Valor</th>
             <th>Categoría</th>
+            <th>Detalle</th>
         </tr>
 
         <?php
@@ -129,6 +77,19 @@ if (isset($_GET['categoria']) && $_GET['categoria'] != "") {
                     <td>{$p['fec_vec_pro']}</td>
                     <td>\${$p['val_pro']}</td>
                     <td>{$p['cod_cat']}</td>
+
+                    <td class='acciones'>
+                        <a href='add_detalle_prod.php?id={$p['cod_pro']}' class='btn-detalle'>
+                            Ver detalle
+                        </a>
+
+
+                        <a href='eliminar_producto.php?id={$p['cod_pro']}'
+                           class='btn-eliminar'
+                           onclick=\"return confirm('⚠️ ¿Estás segura de eliminar este producto? Esta acción no se puede deshacer.');\">
+                           Eliminar
+                        </a>
+                    </td>
                 </tr>";
             }
         } else {

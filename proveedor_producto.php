@@ -43,6 +43,7 @@ $productos = $conexion->query("SELECT cod_pro, nom_pro FROM productos");
     <title>Asociar Proveedor con Producto</title>
 </head>
 <body>
+    <?php include __DIR__ . '/menu.php'; ?>
     <div class="contenedor">
         <h2>Asociar Proveedor con Producto</h2>
 

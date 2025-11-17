@@ -60,3 +60,18 @@ input[type="submit"]:hover {
     font-weight: bold;
     color: #ad1457;
 }
+.btn-rosa {
+    display: inline-block;
+    background-color: #e75480;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+    margin-top: 15px;
+}
+
+.btn-rosa:hover {
+    background-color: #d83264;
+}

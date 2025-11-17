@@ -7,33 +7,38 @@ $db = "supermercado";
 
 $conexion = new mysqli($server, $user, $pass, $db);
 if ($conexion->connect_error) {
-    die("Hubo un error al moemnto de conectar. Intentalo de nuevo" . $conexion->connect_error);
+    die("Hubo un error al conectar: " . $conexion->connect_error);
 }
 
 $mensaje = "";
 
+// ---- GUARDAR DETALLE ----
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $valor_uni_prod = $_POST['val_unit_prod'];
-    $valor_total_prod = $_POST['val_total_prod'];
-    $cantidad_prod = $_POST['cant_prod'];
-    $nro_factura = $_POST['nro_fac'];
-    $codigo_producto = $_POST['cod_pro'];
+    $nro_fac = $_POST['nro_fac'];
+    $cod_pro = $_POST['cod_pro'];
+    $cant_prod = $_POST['cant_prod'];
+    $val_unit_prod = $_POST['val_unit_prod'];
+    $val_total_prod = $_POST['val_total_prod'];
 
-    if (!empty($valor_uni_prod) && !empty($valor_total_prod) && !empty($cantidad_prod) && !empty($nro_factura) && !empty($codigo_producto)) {
-        $sql = "INSERT INTO clientes (val_unit_prod, val_total_prod, cant_prod, nro_fac, cad_pro)
-                VALUES ('$valor_uni_prod', '$valor_total_prod', '$cantidad_prod', '$nro_factura', '$codigo_producto')";
+    if (!empty($nro_fac) && !empty($cod_pro) && !empty($cant_prod) && !empty($val_unit_prod) && !empty($val_total_prod)) {
+
+        $sql = "INSERT INTO detalle_productos (nro_fac, cod_pro, cant_prod, val_unit_prod, val_total_prod)
+                VALUES ('$nro_fac', '$cod_pro', '$cant_prod', '$val_unit_prod', '$val_total_prod')";
         
         if ($conexion->query($sql) === TRUE) {
-            $mensaje = "✅ Cliente agregado exitosamente.";
+            $mensaje = "✅ Detalle agregado exitosamente.";
         } else {
-            $mensaje = "❌ Error al agregar cliente: " . $conexion->error;
+            $mensaje = "❌ Error al agregar detalle: " . $conexion->error;
         }
     } else {
-        $mensaje = "⚠️ Por favor completa todos los campos.";
+        $mensaje = "⚠️ Completa todos los campos.";
     }
 }
-?>
 
+// ---- CONSULTAR DETALLES ----
+$detalles = $conexion->query("SELECT * FROM detalle_productos");
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -42,16 +47,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Agregar Detalle Producto</title>
 </head>
 <body>
-    <?php include __DIR__ . '/menu.php'; ?>
-    <div class="contenedor">
-        <h2>Agregar Detalle de Producto</h2>
 
-        <form method="POST" action="">
-            <input type="text" name="id_det" placeholder="ID del Detalle" maxlength="10"><br>
-            <input type="text" name="id_prod" placeholder="ID del Producto" maxlength="10"><br>
-            <input type="number" name="cantidad" placeholder="Cantidad" min="1"><br>
-            <input type="number" step="0.01" name="total" placeholder="Total"><br>
+<?php include __DIR__ . '/menu.php'; ?>
 
+<div class="contenedor_principal">
+
+    <!-- FORMULARIO (IZQUIERDA) -->
+    <div class="contenedor formulario">
+        <h2>Agregar Detalle</h2>
+
+        <form method="POST">
+            <input type="text" name="nro_fac" placeholder="Número de Factura"><br>
+            <input type="text" name="cod_pro" placeholder="Código del Producto"><br>
+            <input type="number" name="cant_prod" placeholder="Cantidad"><br>
+            <input type="number" step="0.01" name="val_unit_prod" placeholder="Valor Unitario"><br>
+            <input type="number" step="0.01" name="val_total_prod" placeholder="Valor Total"><br>
             <input type="submit" value="Guardar Detalle">
         </form>
 
@@ -59,6 +69,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p class="mensaje"><?= $mensaje ?></p>
         <?php endif; ?>
     </div>
+
+    <!-- TABLA (DERECHA) -->
+    <div class="contenedor tabla">
+        <h2>Detalles Registrados</h2>
+
+        <table>
+            <tr>
+                <th>Nro Factura</th>
+                <th>Cód Producto</th>
+                <th>Cantidad</th>
+                <th>Valor Unit.</th>
+                <th>Valor Total</th>
+            </tr>
+
+            <?php while ($row = $detalles->fetch_assoc()) { ?>
+            <tr>
+                <td><?= $row['nro_fac'] ?></td>
+                <td><?= $row['cod_pro'] ?></td>
+                <td><?= $row['cant_prod'] ?></td>
+                <td><?= $row['val_unit_prod'] ?></td>
+                <td><?= $row['val_total_prod'] ?></td>
+            </tr>
+            <?php } ?>
+        </table>
+    </div>
+
+</div>
 
 </body>
 </html>
