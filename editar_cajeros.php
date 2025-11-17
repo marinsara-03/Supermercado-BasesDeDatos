@@ -11,19 +11,18 @@ if ($conexion->connect_error) {
 
 $mensaje = "";
 
-// 1. Verificar si llega el ID del cajero
 if (!isset($_GET['id'])) {
-    die("❌ Error: No se recibió el ID del cajero.");
+    die("❌ Error: No recibimos el ID del cajero, por favor vuelve a intentarlo.");
 }
 
 $id = $_GET['id'];
 
-// 2. Traer los datos actuales del cajero
+
 $sql = "SELECT * FROM cajeros WHERE ide_caj = '$id'";
 $result = $conexion->query($sql);
 
 if ($result->num_rows == 0) {
-    die("❌ No se encontró el cajero con ese ID.");
+    die("❌ Lo sentimos, pero no hay un cajero con ese ID.");
 }
 
 $cajero = $result->fetch_assoc();
@@ -39,18 +38,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $update = "UPDATE cajeros 
                    SET nom_caj='$nom_caj', tel_caj='$tel_caj', dir_caj='$dir_caj'
-                   WHERE ide_caj='$id'";
+                   WHERE ide_caj='$id";
 
         if ($conexion->query($update) === TRUE) {
-            $mensaje = "✅ Datos actualizados correctamente.";
-            // Refrescar los datos
+            $mensaje = "✅ Los datos fueron actualizados correctamente.";
+            
             $cajero = [
                 "nom_caj" => $nom_caj,
                 "tel_caj" => $tel_caj,
                 "dir_caj" => $dir_caj
             ];
         } else {
-            $mensaje = "❌ Error al actualizar: " . $conexion->error;
+            $mensaje = "❌ Hubo un error al actualizar los datos, por favor intentalo de nuevo: " . $conexion->error;
         }
     } else {
         $mensaje = "⚠️ Todos los campos son obligatorios.";

@@ -50,7 +50,7 @@ $cajeros = $conexion->query("SELECT * FROM cajeros ORDER BY ide_caj ASC");
  
 <div class="contenedor-flex">
 
-    <!-- FORMULARIO -->
+    
     <div class="formulario">
         <h2>Agregar Nuevo Cajero</h2>
 
@@ -67,7 +67,6 @@ $cajeros = $conexion->query("SELECT * FROM cajeros ORDER BY ide_caj ASC");
         <?php endif; ?>
     </div>
 
-    <!-- TABLA -->
     <div class="tabla">
         <h2>Lista de Cajeros</h2>
 
