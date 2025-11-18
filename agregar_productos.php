@@ -23,19 +23,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fecha_ven_pro    = $_POST['fec_vec_pro']; 
     $cantidad_prod    = $_POST['cant_pro'];
     $nombre_prod      = $_POST['nom_pro'];
+    
     $valor_producto   = $_POST['val_pro'];
 
     
     if (!empty($codigo_producto) && !empty($codigo_categoria) && !empty($fecha_ven_pro) && !empty($cantidad_prod) && !empty($nombre_prod) && !empty($valor_producto)) {
-       $sql = "INSERT INTO productos (cod_pro, cod_cat, fec_vec_pro, cant_pro, nom_pro, val_pro) 
-VALUES ('$codigo_producto', '$codigo_categoria', '$fecha_vec_pro','$cantidad_prod', '$nombre_prod', '$valor_producto')";
 
-        
-        if ($conexion->query($sql) === TRUE) {
-            $mensaje = "El producto fue agregado exitosamente.";
+        // Verificar si el código de producto ya existe
+        $check = $conexion->query("SELECT * FROM productos WHERE cod_pro='$codigo_producto'");
+        if ($check->num_rows > 0) {
+            $mensaje = "❌ El código de producto '$codigo_producto' ya existe.";
         } else {
-            $mensaje = "❌ Error al agregar el producto: " . $conexion->error;
+            $sql = "INSERT INTO productos (cod_pro, cod_cat, fec_vec_pro, cant_pro, nom_pro, val_pro) 
+                    VALUES ('$codigo_producto', '$codigo_categoria', '$fecha_ven_pro', '$cantidad_prod', '$nombre_prod', '$valor_producto')";
+
+            if ($conexion->query($sql) === TRUE) {
+                $mensaje = "✔️ El producto fue agregado exitosamente.";
+            } else {
+                $mensaje = "❌ Error al agregar el producto: " . $conexion->error;
+            }
         }
+
     } else {
         $mensaje = "⚠️ Por favor, completa todos los campos.";
     }

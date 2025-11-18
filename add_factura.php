@@ -50,16 +50,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="add_factura.css">
-    <title>Agregar Factura</title>
-    <link rel="stylesheet" href="estilos.css">
+    <title>Factura</title>
 </head>
 <body>
     <?php include __DIR__ . '/menu.php'; ?>
-    <div class="contenedor">
+<div class="contenedor">
+
+    <!-- FORMULARIO A LA IZQUIERDA -->
+    <div class="formulario">
         <h2>🧾 Agregar Factura</h2>
+
+        <?php if (!empty($mensaje)) echo $mensaje; ?>
+
         <form method="POST" action="">
-            <input type="number" name="nro_fac" required placeholder = "Número de factura">
-            <input type="number" step="0.01" name="val_tot_fac" required placeholder = "Valor total de la factura">
+            <input type="number" name="nro_fac" required placeholder="Número de factura">
+            <input type="number" step="0.01" name="val_tot_fac" required placeholder="Valor total de la factura">
 
             <label>Fecha de la Factura:</label>
             <input type="datetime-local" name="fec_fac" required>
@@ -67,25 +72,70 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label>Cliente:</label>
             <select name="ide_cli" required>
                 <option value="">-- Selecciona un cliente --</option>
-                <?php
-                foreach ($clientes as $cli) {
-                    echo "<option value='{$cli['ide_cli']}'>{$cli['nom_cli']}</option>";
-                }
-                ?>
+                <?php foreach ($clientes as $cli): ?>
+                    <option value="<?= $cli['ide_cli'] ?>"><?= $cli['nom_cli'] ?></option>
+                <?php endforeach; ?>
             </select>
 
             <label>Cajero:</label>
             <select name="ide_caj" required>
                 <option value="">-- Selecciona un cajero --</option>
-                <?php
-                foreach ($cajeros as $caj) {
-                    echo "<option value='{$caj['ide_caj']}'>{$caj['nom_caj']}</option>";
-                }
-                ?>
+                <?php foreach ($cajeros as $caj): ?>
+                    <option value="<?= $caj['ide_caj'] ?>"><?= $caj['nom_caj'] ?></option>
+                <?php endforeach; ?>
             </select>
 
             <button type="submit">🛒 Agregar Factura</button>
         </form>
     </div>
+
+    <!-- TABLA A LA DERECHA -->
+    <div class="tabla">
+        <h2>Facturas Registradas</h2>
+
+        <table>
+            <tr>
+                <th>Número de Factura</th>
+                <th>Cliente</th>
+                <th>Cajero</th>
+                <th>Valor Total</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+            </tr>
+
+            <?php
+            $facturas = $conexion->query("
+                SELECT f.nro_fac, f.val_tot_fac, f.fec_fac, 
+                       c.nom_cli, ca.nom_caj
+                FROM facturas f
+                JOIN Clientes c ON f.ide_cli = c.ide_cli
+                JOIN Cajeros ca ON f.ide_caj = ca.ide_caj
+                ORDER BY f.nro_fac DESC
+            ");
+
+            while ($row = $facturas->fetch_assoc()):
+            ?>
+            <tr>
+                <td><?= $row['nro_fac'] ?></td>
+                <td><?= $row['nom_cli'] ?></td>
+                <td><?= $row['nom_caj'] ?></td>
+                <td><?= $row['val_tot_fac'] ?></td>
+                <td><?= $row['fec_fac'] ?></td>
+                <td>
+                    <a class="btn-eliminar"
+                       href="eliminar_factura.php?nro_fac=<?= $row['nro_fac'] ?>"
+                       onclick="return confirm('¿Seguro que deseas eliminar esta factura?')">
+                        Eliminar
+                    </a>
+                    <a href="imprimir_recibo.php?nro_fac=<?= $row['nro_fac'] ?>" target="_blank">
+                        🖨️ Imprimir
+                    </a>
+                </td>
+            </tr>
+            <?php endwhile; ?>
+        </table>
+    </div>
+
+</div>
 </body>
 </html>

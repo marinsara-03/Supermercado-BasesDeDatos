@@ -44,7 +44,8 @@ if (isset($_POST['guardar'])) {
 /* ---------------------------------------------------
    CONSULTAR DETALLES
 --------------------------------------------------- */
-$detalles = $conn->query("SELECT * FROM detalle_productos ORDER BY id DESC");
+$detalles = $conn->query("SELECT * FROM detalle_productos ORDER BY nro_fac DESC");
+
 
 ?>
 
@@ -84,6 +85,14 @@ $detalles = $conn->query("SELECT * FROM detalle_productos ORDER BY id DESC");
 
             <button type="submit" name="guardar">Guardar</button>
         </form>
+        <!-- Botón para ir a Facturas -->
+        <div style="text-align: right; margin-bottom: 15px;">
+            <a href="add_factura.php">
+                <button type="button" style="background-color:#f78fb3; color:white; padding:10px 15px; border:none; border-radius:8px; cursor:pointer;">
+                    🧾 Ir a Factura
+                </button>
+            </a>
+        </div>
     </div>
 
     <!-- TABLA -->
@@ -92,7 +101,6 @@ $detalles = $conn->query("SELECT * FROM detalle_productos ORDER BY id DESC");
 
         <table>
             <tr>
-                <th>ID</th>
                 <th>Factura</th>
                 <th>Producto</th>
                 <th>Cantidad</th>
@@ -103,7 +111,6 @@ $detalles = $conn->query("SELECT * FROM detalle_productos ORDER BY id DESC");
 
             <?php while ($row = $detalles->fetch_assoc()) { ?>
             <tr>
-                <td><?= $row['id'] ?></td>
                 <td><?= $row['nro_fac'] ?></td>
                 <td><?= $row['cod_pro'] ?></td>
                 <td><?= $row['cant_prod'] ?></td>
@@ -111,13 +118,9 @@ $detalles = $conn->query("SELECT * FROM detalle_productos ORDER BY id DESC");
                 <td><?= $row['val_total_prod'] ?></td>
 
                 <td>
-                    <a class="btn-editar" href="editar_detalle.php?id=<?= $row['id'] ?>">
-                        Editar
-                    </a>
-
                     <a class="btn-eliminar" 
-                       href="eliminar_detalle.php?id=<?= $row['id'] ?>"
-                       onclick="return confirm('¿Seguro que deseas eliminar este detalle?')">
+                        href="eliminar_detalle.php?nro_fac=<?= $row['nro_fac'] ?>&cod_pro=<?= $row['cod_pro'] ?>"
+                        onclick="return confirm('¿Seguro que deseas eliminar este detalle?')">
                         Eliminar
                     </a>
                 </td>

@@ -1,0 +1,118 @@
+/* Fondo suave rosado */
+body {
+    background-color: #fdf6f9;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 80px;
+}
+
+/* Caja principal tipo recibo */
+.recibo {
+    width: 90%;
+    max-width: 380px; /* tamaño típico de recibo */
+    margin: 20px auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(255, 182, 193, 0.35);
+    border-top: 6px solid #f8a5c2;
+}
+
+/* Título principal */
+h2 {
+    text-align: center;
+    color: #b71540;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+/* Información inicial: cliente, cajero... */
+.info {
+    margin-bottom: 15px;
+    background: #fff0f5;
+    padding: 12px;
+    border-radius: 10px;
+    border-left: 5px solid #f8a5c2;
+}
+
+.info p {
+    margin: 4px 0;
+    font-size: 14px;
+}
+
+/* Tabla de productos */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 8px 5px;
+    border-bottom: 1px solid #f8c1d7;
+    font-size: 14px;
+}
+
+th {
+    background-color: #f8a5c2;
+    color: white;
+    font-weight: 600;
+}
+
+tr:hover {
+    background-color: #ffe6f0;
+}
+
+/* Total */
+.total {
+    text-align: right;
+    background: #ffe6f0;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 12px;
+    font-size: 17px;
+    font-weight: bold;
+    border: 1px solid #f8a5c2;
+}
+
+/* Botón de imprimir */
+.btn-imprimir {
+    width: 100%;
+    margin-top: 20px;
+    background-color: #f78fb3;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+    transition: background 0.3s ease, transform 0.1s ease;
+}
+
+.btn-imprimir:hover {
+    background-color: #e84393;
+    transform: scale(1.02);
+}
+
+/* Ocultar botón al imprimir */
+@media print {
+    .btn-imprimir {
+        display: none;
+    }
+
+    body {
+        background: white !important;
+        margin: 0;
+        padding: 0;
+    }
+
+    .recibo {
+        box-shadow: none;
+        border-top: none;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+}
