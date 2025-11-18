@@ -1,0 +1,147 @@
+/* Fondo y tipografía */
+body {
+    background: #fde8f0;
+    font-family: 'Segoe UI', sans-serif;
+    padding-top: 80px;
+    margin: 0;
+  }
+  
+  /* Contenedor principal tipo tarjeta */
+  .contenedor {
+    width: 92%;
+    max-width: 900px;
+    margin: 30px auto;
+    background: #fff;
+    border: 2px solid #ffb9d9;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(236, 72, 153, 0.20);
+    padding: 24px 22px;
+  }
+  
+  .contenedor h2 {
+    color: #d63384;
+    text-align: center;
+    margin: 0 0 16px;
+  }
+  
+  /* Mensajes */
+  .mensaje,
+  .exito,
+  .error {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin: 8px 0 16px;
+    font-weight: 600;
+  }
+  
+  .exito {
+    background: #eafff4;
+    border: 1px solid #8be1b0;
+    color: #126b3d;
+  }
+  
+  .error {
+    background: #ffe6ee;
+    border: 1px solid #f3a6c8;
+    color: #8a1552;
+  }
+  
+  .mensaje {
+    background: #ffe0ef;
+    border: 1px solid #f3a6c8;
+    color: #8a1552;
+  }
+  
+  /* Formulario */
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 20px;
+  }
+  
+  /* Etiquetas */
+  label {
+    grid-column: span 2;
+    font-size: 14px;
+    color: #c21888;
+    margin-top: 4px;
+  }
+  
+  /* Inputs y selects */
+  input[type="number"],
+  input[type="text"],
+  input[type="datetime-local"],
+  select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #f3a6c8;
+    background: #fff5fa;
+    font-size: 15px;
+  }
+  
+  input[readonly] {
+    background: #fff0fb;
+    color: #8a3d66;
+  }
+  
+  /* Hacer que algunos campos ocupen toda la fila si hace falta */
+  .full {
+    grid-column: span 2;
+  }
+  
+  /* Botones */
+  button[type="submit"] {
+    grid-column: span 2;
+    width: 100%;
+    background: #e75480;
+    color: #fff;
+    padding: 14px;
+    border: none;
+    margin-top: 6px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(231, 84, 128, 0.3);
+  }
+  
+  button[type="submit"]:hover {
+    background: #d83264;
+  }
+  
+  /* Botón volver */
+  .btn-volver {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #d63384;
+    background: #fff;
+    border: 1px solid #ffb9d9;
+    font-weight: 700;
+  }
+  
+  /* Espaciado entre acciones */
+  .actions {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  
+  /* Responsivo */
+  @media (max-width: 720px) {
+    form {
+      grid-template-columns: 1fr;
+    }
+    .full,
+    button[type="submit"],
+    .actions {
+      grid-column: span 1;
+    }
+  }
