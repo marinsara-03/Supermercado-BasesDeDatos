@@ -14,21 +14,22 @@ $mensaje = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    $ide_caj = $_POST['ide_caj'];
     $nom_cajero = $_POST['nom_cajero'];
     $tel_cajero = $_POST['tel_cajero'];
     $dir_cajero = $_POST['dir_cajero'];
 
     // VALIDACIÓN CORRECTA
-    if (!empty($nom_cajero) && !empty($tel_cajero) && !empty($dir_cajero)) {
+    if (!empty($ide_caj) && !empty($nom_cajero) && !empty($tel_cajero) && !empty($dir_cajero)) {
 
         // INSERT CORRECTO SEGÚN TU BASE DE DATOS
-        $sql = "INSERT INTO cajeros (nom_caj, dir_caj, tel_caj)
-                VALUES ('$nom_cajero', '$dir_cajero', '$tel_cajero')";
+        $sql = "INSERT INTO cajeros (ide_caj, nom_caj, dir_caj, tel_caj)
+                VALUES ('$ide_caj','$nom_cajero', '$dir_cajero', '$tel_cajero')";
 
         if ($conexion->query($sql) === TRUE) {
-            $mensaje = "✅ Cajero agregado exitosamente.";
+            $mensaje = "✅ El cajero ha sido agregado exitosamente.";
         } else {
-            $mensaje = "❌ Error al agregar cajero: " . $conexion->error;
+            $mensaje = "❌ Lo sentimos, no se pudo agregar el cajero, por favor intentalo nuevamente. " . $conexion->error;
         }
 
     } else {
@@ -38,6 +39,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $cajeros = $conexion->query("SELECT * FROM cajeros ORDER BY ide_caj ASC");
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -55,6 +58,7 @@ $cajeros = $conexion->query("SELECT * FROM cajeros ORDER BY ide_caj ASC");
         <h2>Agregar Nuevo Cajero</h2>
 
         <form method="POST">
+            <input type="text" name="ide_caj" placeholder="Documento del cajero"><br>
             <input type="text" name="nom_cajero" placeholder="Nombre del Cajero"><br>
             <input type="text" name="tel_cajero" placeholder="Teléfono"><br>
             <input type="text" name="dir_cajero" placeholder="Dirección">

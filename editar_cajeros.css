@@ -25,10 +25,23 @@ body {
 
 .formulario h2 {
     color: #d63384;
+    margin: 0 0 10px;
 }
 
-input[type="text"],
-input[type="number"] {
+
+.alerta {
+    margin: 8px auto 14px;
+    width: 95%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #ffe0ef;
+    border: 1px solid #f3a6c8;
+    color: #8a1552;
+    font-weight: 600;
+}
+
+
+input[type="text"], input[type="number"] {
     width: 90%;
     padding: 12px;
     margin: 8px 0;
@@ -37,6 +50,12 @@ input[type="number"] {
     background: #fff5fa;
     font-size: 15px;
 }
+
+input[readonly] {
+    background: #fff0fb;
+    color: #8a3d66;
+}
+
 
 input[type="submit"] {
     width: 95%;
@@ -56,7 +75,23 @@ input[type="submit"]:hover {
     background: #d83264;
 }
 
-/* TABLA */
+.btn-volver {
+    display: inline-block;
+    width: 95%;
+    margin-top: 10px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #d63384;
+    background: #fff;
+    border: 1px solid #ffb9d9;
+    font-weight: 700;
+}
+
+.btn-volver:hover {
+    background: #fff0fb;
+}
+
 .tabla {
     width: 60%;
 }
@@ -64,6 +99,7 @@ input[type="submit"]:hover {
 .tabla h2 {
     text-align: center;
     color: #c21888;
+    margin: 0 0 12px;
 }
 
 table {
@@ -91,11 +127,9 @@ tr:hover {
     background: #fff0fb;
 }
 
-/* BOTONES ACCIONES */
 .btn-editar {
     background: #ff80c0;
     color: white;
-    
     padding: 6px 12px;
     border-radius: 8px;
     text-decoration: none;
@@ -104,7 +138,6 @@ tr:hover {
 .btn-eliminar {
     background: #ff4b8a;
     color: white;
-    
     padding: 6px 12px;
     border-radius: 8px;
     text-decoration: none;
@@ -116,4 +149,13 @@ tr:hover {
 
 .btn-eliminar:hover {
     background: #d63a72;
+}
+
+    @media (max-width: 1024px) {
+    .contenedor-flex {
+        flex-direction: column;
+    }
+    .formulario, .tabla {
+        width: 100%;
+    }
 }

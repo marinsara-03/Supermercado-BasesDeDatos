@@ -37,8 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($nom_caj) && !empty($tel_caj) && !empty($dir_caj)) {
 
         $update = "UPDATE cajeros 
-                   SET nom_caj='$nom_caj', tel_caj='$tel_caj', dir_caj='$dir_caj'
-                   WHERE ide_caj='$id";
+            SET nom_caj='$nom_caj', tel_caj='$tel_caj', dir_caj='$dir_caj'
+            WHERE ide_caj='$id'";
 
         if ($conexion->query($update) === TRUE) {
             $mensaje = "✅ Los datos fueron actualizados correctamente.";
@@ -57,3 +57,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 ?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Editar cajero</title>
+    <link rel="stylesheet" href="editar_cajeros.css" />
+</head>
+<body>
+    <div class="contenedor-flex">
+
+        <div class="formulario">
+            <h2>Editar cajero</h2>
+
+            <form method="POST">
+                <input type="text" name="ide_caj" placeholder="Documento del cajero"><br>
+                <input type="text" name="nom_caj" placeholder="Nombre del cajero"><br>
+                <input type="text" name="tel_caj" placeholder="Teléfono"><br>
+                <input type="text" name="dir_caj" placeholder="Dirección">
+
+                <input type="submit" value="Guardar cambios" />
+                <a class="btn-volver" href="lista_cajeros.php">Volver</a>
+            </form>
+        </div>
+
+        <div class="tabla">
+            <h2>Detalle actual</h2>
+            <table>
+                <tr>
+                    <th>Campo</th>
+                    <th>Valor</th>
+                </tr>
+                <tbody>
+                <tr><td>ID</td><td><?= htmlspecialchars($id) ?></td></tr>
+                <tr><td>Nombre</td><td><?= htmlspecialchars($cajero['nom_caj'] ?? '') ?></td></tr>
+                <tr><td>Teléfono</td><td><?= htmlspecialchars($cajero['tel_caj'] ?? '') ?></td></tr>
+                <tr><td>Dirección</td><td><?= htmlspecialchars($cajero['dir_caj'] ?? '') ?></td></tr>
+                </tbody>
+            </table>
+            </div>
+    </div>
+</body>
+</html>
