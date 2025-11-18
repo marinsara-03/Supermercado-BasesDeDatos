@@ -54,6 +54,7 @@
         <a class="btn" href="agregar_proveedores.php"><i>🧺</i> Proveedores</a>
         <a class="btn" href="add_cajeros.php"><i>👩‍💼</i> Cajeros</a>
         <a class="btn" href="add_cliente.php"><i>👩‍❤️‍👩</i> Clientes</a>
+        <a class="btn" href="add_factura.php"><i>📄</i> Facturas</a>
       </section>
 
       <div class="footer">Hecho con cariño</div>
