@@ -66,6 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="editar_cajeros.css" />
 </head>
 <body>
+    <?php include __DIR__ . '/menu.php'; ?>
     <div class="contenedor-flex">
 
         <div class="formulario">

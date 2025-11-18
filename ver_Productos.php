@@ -82,7 +82,9 @@ if (isset($_GET['categoria']) && $_GET['categoria'] != "") {
                         <a href='add_detalle_prod.php?id={$p['cod_pro']}' class='btn-detalle'>
                             Ver detalle
                         </a>
-
+                        <a href='editar_producto.php?id={$p['cod_pro']}' class='btn-editar'>
+                            Editar
+                        </a>
 
                         <a href='eliminar_producto.php?id={$p['cod_pro']}'
                            class='btn-eliminar'

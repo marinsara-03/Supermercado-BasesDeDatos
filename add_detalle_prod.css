@@ -1,124 +1,170 @@
+/* ---- ESTILO GENERAL ---- */
 body {
     background: #fde8f0;
     font-family: 'Segoe UI', sans-serif;
+    margin: 0;
     padding-top: 80px;
 }
 
-/* CONTENEDOR GENERAL PARA PONER FORM + TABLA */
-.contenedor_principal {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-top: 30px;
-}
-
-/* CONTENEDOR INDIVIDUAL */
+/* ---- CONTENEDOR FLEX ---- */
 .contenedor {
-    width: 420px;
+    width: 90%;
+    margin: 30px auto;
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* ---- FORMULARIO ---- */
+.formulario {
+    width: 35%;
+    background: #fff;
     padding: 25px;
-    background: #ffffff;
     border-radius: 14px;
-    box-shadow: 0 6px 18px rgba(236, 72, 153, 0.20);
     border: 2px solid #ffb9d9;
-}
-
-/* TITULOS */
-h2 {
+    box-shadow: 0 6px 18px rgba(236, 72, 153, 0.20);
     text-align: center;
-    color: #d63384;
-    margin-bottom: 20px;
 }
 
-/* INPUTS */
+.formulario h2 {
+    color: #d63384;
+    margin-bottom: 15px;
+}
+
+/* Labels */
+.formulario label {
+    display: block;
+    margin-top: 12px;
+    color: #c21888;
+    font-weight: bold;
+    text-align: left;
+}
+
+/* Inputs */
 input[type="text"],
 input[type="number"] {
     width: 90%;
     padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #f3a6c8;
+    margin: 8px 0;
     border-radius: 10px;
+    border: 1px solid #f3a6c8;
+    background: #fff5fa;
     font-size: 15px;
-    background-color: #fff5fa;
-    color: #6b2f4f;
-    transition: 0.3s;
 }
 
 input:focus {
-    border-color: #e0639b;
-    box-shadow: 0 0 6px rgba(224, 99, 155, 0.3);
-    outline: none;
+    border-color: #e75480;
 }
 
-/* BOTON */
+/* Botón guardar/actualizar */
+button,
 input[type="submit"] {
     width: 95%;
     background: #e75480;
     color: white;
     padding: 14px;
-    margin-top: 15px;
     border: none;
+    margin-top: 15px;
     border-radius: 12px;
     cursor: pointer;
-    transition: 0.3s;
     font-size: 16px;
     font-weight: bold;
+    box-shadow: 0px 4px 10px rgba(231, 84, 128, 0.3);
+    transition: 0.3s;
 }
 
+button:hover,
 input[type="submit"]:hover {
     background: #d83264;
 }
 
-/* TABLA */
+/* Botón cancelar */
+.cancelar {
+    display: inline-block;
+    margin-top: 10px;
+    color: #d63384;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* ---- MENSAJES ---- */
+.exito,
+.error {
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.exito {
+    background: #ffe4f4;
+    color: #b1266a;
+    border-left: 5px solid #e75480;
+}
+
+.error {
+    background: #ffd6e2;
+    color: #8e2e63;
+    border-left: 5px solid #d63384;
+}
+
+/* ---- TABLA ---- */
+.tabla {
+    width: 60%;
+}
+
+.tabla h2 {
+    text-align: center;
+    color: #c21888;
+    margin-bottom: 15px;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(236, 72, 153, 0.15);
+    text-align: center;
 }
 
 th {
-    background: #ffb9d9;
-    padding: 10px;
-    color: #6b2f4f;
-    font-weight: bold;
+    background: #ffb3ec;
+    color: #6a006a;
+    padding: 12px;
 }
 
 td {
-    padding: 8px;
-    text-align: center;
-    border-bottom: 1px solid #f3a6c8;
+    padding: 10px;
+    border-bottom: 1px solid #ffd4fa;
 }
 
-/* MENSAJE */
-.mensaje {
-    margin-top: 10px;
-    font-weight: bold;
-    text-align: center;
-    color: #b42364;
-}
-/* BOTONES EDITAR Y ELIMINAR */
-.btn-editar,
-.btn-eliminar {
-    padding: 6px 10px;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: bold;
+tr:hover {
+    background: #fff0fb;
 }
 
+/* ---- BOTONES ACCIONES ---- */
 .btn-editar {
-    background: #ff9acb; /* rosado pastel */
-    color: #6b2f4f;
+    background: #ff80c0;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.btn-eliminar {
+    background: #ff4b8a;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    text-decoration: none;
 }
 
 .btn-editar:hover {
-    background: #ff7fbf;
-}
-
-.btn-eliminar {
-    background: #ff6e9f; /* rosado fuerte */
-    color: white;
+    background: #e75cae;
 }
 
 .btn-eliminar:hover {
-    background: #d9537b;
+    background: #d63a72;
 }

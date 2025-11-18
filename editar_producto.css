@@ -1,0 +1,128 @@
+/* Fondo general */
+body {
+    background-color: #fdeaff; /* rosa clarito pastel */
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 80px;
+}
+
+/* Contenedor principal */
+.contenedor-flex {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+/* -------- FORMULARIO -------- */
+.formulario {
+    background: white;
+    padding: 30px;
+    width: 340px;
+    border-radius: 18px;
+    box-shadow: 0 4px 12px rgba(255, 150, 220, 0.25); /* Sombra rosada suave */
+    border: 2px solid #ffc8f3; /* borde rosado pastel */
+}
+
+.formulario h2 {
+    text-align: center;
+    color: #c72b5f;   /* rosa fuerte título */
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+/* Inputs */
+.formulario input[type="text"],
+.formulario input[type="number"],
+.formulario input[type="date"],
+.formulario select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #f3a8e6; /* rosa pastel */
+    margin-bottom: 15px;
+    font-size: 15px;
+    background: #fff6fd; /* rosado muy claro */
+}
+
+/* Botón Guardar */
+.formulario input[type="submit"] {
+    width: 100%;
+    background: #e66eb8; /* rosa medio */
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: 0.3s;
+}
+
+.formulario input[type="submit"]:hover {
+    background: #c457b8; /* rosa más fuerte */
+}
+
+/* Botón Volver */
+.btn-volver {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    background: #ff8fd8; /* rosado brillante */
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-volver:hover {
+    background: #ff6ccf; /* rosa intenso */
+}
+
+/* -------- TABLA -------- */
+.tabla {
+    width: 340px;
+    background: white;
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0 4px 12px rgba(255, 150, 220, 0.25);
+    border: 2px solid #ffc8f3;
+}
+
+.tabla h2 {
+    text-align: center;
+    color: #c72ba5;
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #ffb3ec; /* rosado fuerte */
+    padding: 10px;
+    color: #940c50; /* rosado oscuro para texto */
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ffd4fa; /* rosado claro borde */
+}
+
+tr:hover {
+    background: #fff0fb; /* rosado muy suave hover */
+}
+
+/* Mensajes */
+p {
+    text-align: center;
+    font-weight: bold;
+    color: #c72ba5;
+    margin-top: 10px;
+}
