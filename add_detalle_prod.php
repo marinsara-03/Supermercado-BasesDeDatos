@@ -7,79 +7,31 @@ $db = "supermercado";
 $conn = new mysqli($server, $user, $pass, $db);
 
 $mensaje = "";
+$conn->set_charset("utf8mb4");
 
-// -----------------------------------
-// ELIMINAR REGISTRO
-// -----------------------------------
-if (isset($_GET['eliminar'])) {
-    $id = $_GET['eliminar'];
-    $conn->query("DELETE FROM detalle_productos WHERE id = $id");
-    $mensaje = "<div class='exito'>✔️ Registro eliminado correctamente.</div>";
-}
-
-// -----------------------------------
-// ACTIVAR MODO EDICIÓN
-// -----------------------------------
-$modo_editar = false;
-$editar_dato = null;
-
-if (isset($_GET['editar'])) {
-    $modo_editar = true;
-    $id = $_GET['editar'];
-    $resultado = $conn->query("SELECT * FROM detalle_productos WHERE id = $id");
-    $editar_dato = $resultado->fetch_assoc();
-}
-
-// -----------------------------------
-// GUARDAR CAMBIOS EDITADOS
-// -----------------------------------
-if (isset($_POST['actualizar'])) {
-    $id = $_POST['id'];
-    $nro_fac = $_POST['nro_fac'];
-    $cod_pro = $_POST['cod_pro'];
-    $cant_prod = $_POST['cant_prod'];
-    $val_unit_prod = $_POST['val_unit_prod'];
-    $val_total_prod = $cant_prod * $val_unit_prod;
-
-    // Verificar que exista la factura
-    $check = $conn->query("SELECT * FROM facturas WHERE nro_fac = '$nro_fac'");
-
-    if ($check->num_rows == 0) {
-        $mensaje = "<div class='error'>❌ El número de factura <b>$nro_fac</b> no existe. No se puede actualizar.</div>";
-    } else {
-        $sql = "UPDATE detalle_productos SET 
-                nro_fac='$nro_fac',
-                cod_pro='$cod_pro',
-                cant_prod='$cant_prod',
-                val_unit_prod='$val_unit_prod',
-                val_total_prod='$val_total_prod'
-                WHERE id = '$id'";
-
-        if ($conn->query($sql)) {
-            $mensaje = "<div class='exito'>✔️ Detalle actualizado correctamente</div>";
-        } else {
-            $mensaje = "<div class='error'>❌ Error al actualizar: " . $conn->error . "</div>";
-        }
-    }
-}
-
-// -----------------------------------
-// GUARDAR NUEVO REGISTRO
-// -----------------------------------
+/* ---------------------------------------------------
+   GUARDAR NUEVO DETALLE
+--------------------------------------------------- */
 if (isset($_POST['guardar'])) {
-    $nro_fac = $_POST['nro_fac'];
-    $cod_pro = $_POST['cod_pro'];
-    $cant_prod = $_POST['cant_prod'];
-    $val_unit_prod = $_POST['val_unit_prod'];
+
+    $nro_fac = $_POST['nro_fac'] ?? "";
+    $cod_pro = $_POST['cod_pro'] ?? "";
+    $cant_prod = $_POST['cant_prod'] ?? "";
+    $val_unit_prod = $_POST['val_unit_prod'] ?? "";
+
     $val_total_prod = $cant_prod * $val_unit_prod;
 
+    // Validar factura existente
     $check = $conn->query("SELECT * FROM facturas WHERE nro_fac = '$nro_fac'");
 
     if ($check->num_rows == 0) {
         $mensaje = "<div class='error'>❌ La factura <b>$nro_fac</b> no existe.</div>";
     } else {
-        $sql = "INSERT INTO detalle_productos (nro_fac, cod_pro, cant_prod, val_unit_prod, val_total_prod)
-                VALUES ('$nro_fac','$cod_pro','$cant_prod','$val_unit_prod','$val_total_prod')";
+
+        $sql = "INSERT INTO detalle_productos 
+                (nro_fac, cod_pro, cant_prod, val_unit_prod, val_total_prod)
+                VALUES 
+                ('$nro_fac','$cod_pro','$cant_prod','$val_unit_prod','$val_total_prod')";
         
         if ($conn->query($sql)) {
             $mensaje = "<div class='exito'>✔️ Detalle guardado correctamente</div>";
@@ -89,57 +41,48 @@ if (isset($_POST['guardar'])) {
     }
 }
 
-// -----------------------------------
-$detalles = $conn->query("SELECT * FROM detalle_productos");
+/* ---------------------------------------------------
+   CONSULTAR DETALLES
+--------------------------------------------------- */
+$detalles = $conn->query("SELECT * FROM detalle_productos ORDER BY id DESC");
+
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Detalles de Producto</title>
+<title>Detalle de Productos</title>
 <link rel="stylesheet" href="add_detalle_prod.css">
 </head>
 
 <body>
-<?php include __DIR__ . '/menu.php'; ?> <?php include __DIR__ . '/menu.php'; ?>
+
+<?php include __DIR__ . '/menu.php'; ?>
 
 <div class="contenedor">
 
     <!-- FORMULARIO -->
     <div class="formulario">
-        <h2><?php echo $modo_editar ? "Editar Detalle" : "Agregar Detalle"; ?></h2>
+        <h2>Agregar Detalle</h2>
 
         <?php echo $mensaje; ?>
 
         <form method="POST">
 
-            <?php if ($modo_editar) { ?>
-                <input type="hidden" name="id" value="<?php echo $editar_dato['id']; ?>">
-            <?php } ?>
-
             <label>Número de Factura:</label>
-            <input type="number" name="nro_fac" required
-                   value="<?php echo $modo_editar ? $editar_dato['nro_fac'] : ''; ?>">
+            <input type="number" name="nro_fac" required>
 
             <label>Código del Producto:</label>
-            <input type="text" name="cod_pro" required
-                   value="<?php echo $modo_editar ? $editar_dato['cod_pro'] : ''; ?>">
+            <input type="text" name="cod_pro" required>
 
             <label>Cantidad:</label>
-            <input type="number" name="cant_prod" required
-                   value="<?php echo $modo_editar ? $editar_dato['cant_prod'] : ''; ?>">
+            <input type="number" name="cant_prod" required>
 
             <label>Valor Unitario:</label>
-            <input type="number" step="0.01" name="val_unit_prod" required
-                   value="<?php echo $modo_editar ? $editar_dato['val_unit_prod'] : ''; ?>">
+            <input type="number" step="0.01" name="val_unit_prod" required>
 
-            <?php if ($modo_editar) { ?>
-                <button type="submit" name="actualizar">Actualizar</button>
-                <a href="add_detalle_prod.php" class="cancelar">Cancelar</a>
-            <?php } else { ?>
-                <button type="submit" name="guardar">Guardar</button>
-            <?php } ?>
+            <button type="submit" name="guardar">Guardar</button>
         </form>
     </div>
 
@@ -168,9 +111,15 @@ $detalles = $conn->query("SELECT * FROM detalle_productos");
                 <td><?= $row['val_total_prod'] ?></td>
 
                 <td>
-                    <a class="btn-editar" href="add_detalle_prod.php?editar=<?= $row['id'] ?>">Editar</a>
-                    <a class="btn-eliminar" href="add_detalle_prod.php?eliminar=<?= $row['id'] ?>"
-                       onclick="return confirm('¿Seguro que deseas eliminar este registro?')">Eliminar</a>
+                    <a class="btn-editar" href="editar_detalle.php?id=<?= $row['id'] ?>">
+                        Editar
+                    </a>
+
+                    <a class="btn-eliminar" 
+                       href="eliminar_detalle.php?id=<?= $row['id'] ?>"
+                       onclick="return confirm('¿Seguro que deseas eliminar este detalle?')">
+                        Eliminar
+                    </a>
                 </td>
             </tr>
             <?php } ?>

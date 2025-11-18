@@ -1,0 +1,147 @@
+<?php
+$server = "localhost";
+$user = "root";
+$pass = "";
+$db = "supermercado";
+
+$conexion = new mysqli($server, $user, $pass, $db);
+if ($conexion->connect_error) {
+    die("Error de conexión: " . $conexion->connect_error);
+}
+$conexion->set_charset("utf8mb4");
+
+$mensaje = "";
+
+// --------------------------------------------------
+// VALIDAR QUE RECIBIMOS EL ID
+// --------------------------------------------------
+if (!isset($_GET['id'])) {
+    die("❌ Error: No recibimos el ID del detalle.");
+}
+
+$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+
+// --------------------------------------------------
+// CONSULTAR EL DETALLE A EDITAR
+// --------------------------------------------------
+$stmt = $conexion->prepare("SELECT * FROM detalle_productos WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$resultado = $stmt->get_result();
+
+if ($resultado->num_rows == 0) {
+    die("❌ No existe un detalle con ese ID.");
+}
+
+$detalle = $resultado->fetch_assoc();
+$stmt->close();
+
+// --------------------------------------------------
+// SI ENVIAMOS FORMULARIO (POST) → ACTUALIZAR
+// --------------------------------------------------
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $nro_fac = $_POST['nro_fac'] ?? '';
+    $cod_pro = $_POST['cod_pro'] ?? '';
+    $cant_prod = $_POST['cant_prod'] ?? '';
+    $val_unit_prod = $_POST['val_unit_prod'] ?? '';
+
+    if (!empty($nro_fac) && !empty($cod_pro) && !empty($cant_prod) && !empty($val_unit_prod)) {
+
+        $val_total_prod = $cant_prod * $val_unit_prod;
+
+        $upd = $conexion->prepare("
+            UPDATE detalle_productos 
+            SET nro_fac = ?, cod_pro = ?, cant_prod = ?, val_unit_prod = ?, val_total_prod = ?
+            WHERE id = ?
+        ");
+
+        $upd->bind_param("isiddi", 
+            $nro_fac, 
+            $cod_pro, 
+            $cant_prod, 
+            $val_unit_prod, 
+            $val_total_prod, 
+            $id
+        );
+
+        if ($upd->execute()) {
+            $mensaje = "✅ El detalle fue actualizado correctamente.";
+
+            // Actualizamos el array para mostrarlo actualizado
+            $detalle['nro_fac'] = $nro_fac;
+            $detalle['cod_pro'] = $cod_pro;
+            $detalle['cant_prod'] = $cant_prod;
+            $detalle['val_unit_prod'] = $val_unit_prod;
+            $detalle['val_total_prod'] = $val_total_prod;
+
+        } else {
+            $mensaje = "❌ Error al actualizar: " . $upd->error;
+        }
+
+        $upd->close();
+
+    } else {
+        $mensaje = "⚠️ Todos los campos son obligatorios.";
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="editar_detalle.css">
+    <title>Editar Detalle de Producto</title>
+</head>
+
+<body>
+<div class="contenedor-flex">
+
+    <div class="formulario">
+        <h2>Editar Detalle</h2>
+
+        <?php if (!empty($mensaje)): ?>
+            <p class="mensaje"><?= htmlspecialchars($mensaje) ?></p>
+        <?php endif; ?>
+
+        <form method="POST">
+
+            <input type="text" value="<?= htmlspecialchars($detalle['id']) ?>" readonly><br>
+
+            <label>Factura:</label>
+            <input type="number" name="nro_fac" 
+                   value="<?= htmlspecialchars($detalle['nro_fac']) ?>"><br>
+
+            <label>Código Producto:</label>
+            <input type="text" name="cod_pro" 
+                   value="<?= htmlspecialchars($detalle['cod_pro']) ?>"><br>
+
+            <label>Cantidad:</label>
+            <input type="number" name="cant_prod" 
+                   value="<?= htmlspecialchars($detalle['cant_prod']) ?>"><br>
+
+            <label>Valor Unitario:</label>
+            <input type="number" step="0.01" name="val_unit_prod" 
+                   value="<?= htmlspecialchars($detalle['val_unit_prod']) ?>"><br>
+
+            <input type="submit" value="Guardar Cambios">
+            <a class="btn-volver" href="add_detalle_prod.php">Volver</a>
+        </form>
+    </div>
+
+    <div class="tabla">
+        <h2>Datos Actuales</h2>
+        <table>
+            <tr><th>Campo</th><th>Valor</th></tr>
+            <tr><td>ID</td><td><?= htmlspecialchars($detalle['id']) ?></td></tr>
+            <tr><td>Factura</td><td><?= htmlspecialchars($detalle['nro_fac']) ?></td></tr>
+            <tr><td>Producto</td><td><?= htmlspecialchars($detalle['cod_pro']) ?></td></tr>
+            <tr><td>Cantidad</td><td><?= htmlspecialchars($detalle['cant_prod']) ?></td></tr>
+            <tr><td>Unitario</td><td><?= htmlspecialchars($detalle['val_unit_prod']) ?></td></tr>
+            <tr><td>Total</td><td><?= htmlspecialchars($detalle['val_total_prod']) ?></td></tr>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>

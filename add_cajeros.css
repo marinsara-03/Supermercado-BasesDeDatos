@@ -25,7 +25,6 @@ body {
 
 .formulario h2 {
     color: #d63384;
-    margin: 0 0 10px
 }
 
 input[type="text"],
@@ -57,7 +56,7 @@ input[type="submit"]:hover {
     background: #d83264;
 }
 
-
+/* TABLA */
 .tabla {
     width: 60%;
 }
@@ -92,7 +91,7 @@ tr:hover {
     background: #fff0fb;
 }
 
-
+/* BOTONES ACCIONES */
 .btn-editar {
     background: #ff80c0;
     color: white;

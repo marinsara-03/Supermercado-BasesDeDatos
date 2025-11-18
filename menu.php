@@ -13,5 +13,6 @@ $actual = basename($_SERVER['PHP_SELF']);
     <li><a href="add_cajeros.php" class="<?php echo $actual==='add_cajeros.php'?'active':''; ?>">Cajeros</a></li>
     <li><a href="add_cliente.php" class="<?php echo $actual==='add_cliente.php'?'active':''; ?>">Clientes</a></li>
     <li><a href="ver_productos.php" class="<?php echo $actual==='ver_productos.php'?'active':''; ?>">Inventario</a></li>
+    <li><a href="add_factura.php" class="<?php echo $actual==='add_factura.php'?'active':''; ?>">Factura</a></li>
   </ul>
 </nav>

@@ -1,0 +1,102 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #fde8f0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor principal */
+.contenedor {
+    width: 450px;
+    margin: 60px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    border-top: 18px solid #f59ac1;
+}
+
+/* Título */
+h2 {
+    text-align: center;
+    color: #d84e8b;
+    margin-bottom: 25px;
+    font-size: 25px;
+}
+
+/* Etiquetas */
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #5b5b5b;
+}
+
+/* Inputs */
+input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border-radius: 10px;
+    border: 1px solid #ffb3d7;
+    background: #fff4fa;
+    font-size: 15px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #f06292;
+    box-shadow: 0 0 5px rgba(240, 98, 146, 0.5);
+}
+
+/* Botones */
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 25px;
+    background: #f06292;
+    border: none;
+    color: white;
+    font-size: 17px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #ec407a;
+}
+
+/* Botón cancelar */
+.cancelar {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    padding: 12px;
+    background: #ffb3d7;
+    border-radius: 12px;
+    color: #7a0051;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.cancelar:hover {
+    background: #ff8dc2;
+}
+
+/* Mensajes */
+p {
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+p[style*="green"] {
+    background: #d8ffd8;
+    color: green;
+}
+
+p[style*="red"] {
+    background: #ffd8df;
+    color: red;
+}
